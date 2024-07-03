@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CreateProductUseCaseImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">DaClothes</a> &gt; <a href="index.source.html" class="el_package">nl.fontys.s3.daclothes.business.impl.product</a> &gt; <span class="el_source">CreateProductUseCaseImpl.java</span></div><h1>CreateProductUseCaseImpl.java</h1><pre class="source lang-java linenums">package nl.fontys.s3.daclothes.business.impl.product;
+
+import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
+import nl.fontys.s3.daclothes.business.exceptions.UnauthorizedDataAccessException;
+import nl.fontys.s3.daclothes.business.exceptions.UserNotFoundException;
+import nl.fontys.s3.daclothes.business.product.CreateProductUseCase;
+import nl.fontys.s3.daclothes.configuration.security.token.AccessToken;
+import nl.fontys.s3.daclothes.domain.CreateProductRequest;
+import nl.fontys.s3.daclothes.domain.CreateProductResponse;
+import nl.fontys.s3.daclothes.domain.enums.USER_TYPE;
+import nl.fontys.s3.daclothes.persistence.ProductRepository;
+import nl.fontys.s3.daclothes.persistence.UserRepository;
+import nl.fontys.s3.daclothes.persistence.entity.ProductEntity;
+import nl.fontys.s3.daclothes.persistence.entity.UserEntity;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
+@Service
+<span class="fc" id="L21">@AllArgsConstructor</span>
+public class CreateProductUseCaseImpl implements CreateProductUseCase {
+    private final ProductRepository productRepository;
+    private final UserRepository userRepository;
+    private final AccessToken requestAccessToken;
+    @Override
+    @Transactional
+    public CreateProductResponse createProduct ( CreateProductRequest request ) {
+<span class="pc bpc" id="L29" title="1 of 2 branches missed.">        if(requestAccessToken.getRoles().isEmpty()){</span>
+<span class="nc" id="L30">            throw new UnauthorizedDataAccessException(&quot;YOU_HAVE_TO_LOG_IN&quot;);</span>
+        }
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        if (!requestAccessToken.getRoles().contains(USER_TYPE.SELLER.toString())){</span>
+<span class="fc" id="L33">            throw new UnauthorizedDataAccessException(&quot;ONLY_SELLER_CAN_CREATE_A_PRODUCT&quot;);</span>
+        }
+<span class="fc" id="L35">        ProductEntity product = saveNewProduct(request);</span>
+
+<span class="fc" id="L37">        return CreateProductResponse.builder()</span>
+<span class="fc" id="L38">                .id(product.getId()).build();</span>
+
+    }
+
+    private ProductEntity saveNewProduct(CreateProductRequest request){
+<span class="fc" id="L43">        Optional&lt;UserEntity&gt; userEntityOptional = userRepository.findById(request.getUserId());</span>
+
+<span class="pc bpc" id="L45" title="1 of 2 branches missed.">        if (userEntityOptional.isEmpty()){</span>
+<span class="nc" id="L46">            throw new UserNotFoundException(&quot;User not found for id: &quot; + request.getUserId());</span>
+        }
+<span class="fc" id="L48">        UserEntity user = userEntityOptional.get();</span>
+
+<span class="fc" id="L50">        ProductEntity newProduct = ProductEntity.builder()</span>
+<span class="fc" id="L51">                .name(request.getName())</span>
+<span class="fc" id="L52">                .brand(request.getBrand())</span>
+<span class="fc" id="L53">                .price(request.getPrice())</span>
+<span class="fc" id="L54">                .category(request.getCategory())</span>
+<span class="fc" id="L55">                .productCondition(request.getProductCondition())</span>
+<span class="fc" id="L56">                .size(request.getSize())</span>
+<span class="fc" id="L57">                .description(request.getDescription())</span>
+<span class="fc" id="L58">                .userId(user)</span>
+<span class="fc" id="L59">                .available(true)</span>
+<span class="fc" id="L60">                .build();</span>
+<span class="fc" id="L61">        return productRepository.save(newProduct);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

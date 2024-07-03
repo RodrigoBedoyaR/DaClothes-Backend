@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="nl.fontys.s3.daclothes.controller.UserControllerTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-01-22T23:42:09" hostname="Rodrigos-MBP.home" time="0.097">
+  <properties/>
+  <testcase name="testUpdateUser()" classname="nl.fontys.s3.daclothes.controller.UserControllerTest" time="0.079"/>
+  <testcase name="testCreateUser()" classname="nl.fontys.s3.daclothes.controller.UserControllerTest" time="0.009"/>
+  <testcase name="testGetUserByIdIsNotFound()" classname="nl.fontys.s3.daclothes.controller.UserControllerTest" time="0.007"/>
+  <system-out><![CDATA[2024-01-23T00:42:09.271+01:00  INFO 4447 --- [    Test worker] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2024-01-23T00:42:09.271+01:00  INFO 4447 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-01-23T00:42:09.271+01:00  INFO 4447 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2024-01-23T00:42:09.351+01:00  INFO 4447 --- [    Test worker] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2024-01-23T00:42:09.351+01:00  INFO 4447 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-01-23T00:42:09.351+01:00  INFO 4447 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2024-01-23T00:42:09.353+01:00  WARN 4447 --- [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
+2024-01-23T00:42:09.359+01:00  INFO 4447 --- [    Test worker] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2024-01-23T00:42:09.359+01:00  INFO 4447 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-01-23T00:42:09.359+01:00  INFO 4447 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

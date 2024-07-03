@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProductEntity.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">DaClothes</a> &gt; <a href="index.source.html" class="el_package">nl.fontys.s3.daclothes.persistence.entity</a> &gt; <span class="el_source">ProductEntity.java</span></div><h1>ProductEntity.java</h1><pre class="source lang-java linenums">package nl.fontys.s3.daclothes.persistence.entity;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
+
+import java.util.List;
+
+<span class="pc" id="L15">@Builder</span>
+<span class="pc bnc" id="L16" title="All 78 branches missed.">@Data</span>
+<span class="fc" id="L17">@AllArgsConstructor</span>
+<span class="fc" id="L18">@NoArgsConstructor</span>
+@Entity
+@Table(name = &quot;product&quot;)
+public class ProductEntity {
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column(name = &quot;id&quot;)
+<span class="fc" id="L25">    private long id;</span>
+
+    @NotBlank
+    @Column(name = &quot;name&quot;)
+    @Length(min = 2, max = 50)
+<span class="fc" id="L30">    private String name;</span>
+
+    @Column(name = &quot;description&quot;)
+    @NotBlank
+    @Length(min = 2, max = 200)
+<span class="fc" id="L35">    private String description;</span>
+
+    @Column(name = &quot;size&quot;)
+    @NotBlank
+    @Length(min = 1, max = 10)
+<span class="fc" id="L40">    private String size;</span>
+
+    @NotBlank
+    @Column(name = &quot;category&quot;)
+    @Length(min = 2, max = 50)
+<span class="fc" id="L45">    private String category;</span>
+
+    @Column(name = &quot;brand&quot;)
+    @NotBlank
+    @Length(min = 2, max = 50)
+<span class="fc" id="L50">    private String brand;</span>
+
+    @Column(name = &quot;productCondition&quot;)
+    @NotBlank
+    @Length(min = 2, max = 50)
+<span class="fc" id="L55">    private String productCondition;</span>
+
+    @Column(name = &quot;price&quot;)
+    @NotNull
+    @Min(1)
+<span class="fc" id="L60">    private double price;</span>
+
+    @ManyToOne
+    @JoinColumn(name = &quot;userId&quot;)
+<span class="fc" id="L64">    private UserEntity userId;</span>
+
+    @Column(name = &quot;available&quot;)
+<span class="fc" id="L67">    private boolean available;</span>
+
+    @ManyToMany(mappedBy = &quot;order_product_list&quot;)
+<span class="nc" id="L70">    private List&lt;OrderEntity&gt; orders;</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

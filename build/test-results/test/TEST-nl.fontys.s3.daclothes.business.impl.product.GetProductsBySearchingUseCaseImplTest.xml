@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="nl.fontys.s3.daclothes.business.impl.product.GetProductsBySearchingUseCaseImplTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-01-22T23:42:07" hostname="Rodrigos-MBP.home" time="0.001">
+  <properties/>
+  <testcase name="testGetProductsBySearching()" classname="nl.fontys.s3.daclothes.business.impl.product.GetProductsBySearchingUseCaseImplTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

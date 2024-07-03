@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="nl.fontys.s3.daclothes.business.impl.login.LoginUseCaseImplTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-01-22T23:42:07" hostname="Rodrigos-MBP.home" time="0.043">
+  <properties/>
+  <testcase name="login_withRightCredentials_returnsAccessToken()" classname="nl.fontys.s3.daclothes.business.impl.login.LoginUseCaseImplTest" time="0.032"/>
+  <testcase name="login_withInvalidCredentials_throwsException()" classname="nl.fontys.s3.daclothes.business.impl.login.LoginUseCaseImplTest" time="0.01"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

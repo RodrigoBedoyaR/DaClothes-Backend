@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserEntity.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">DaClothes</a> &gt; <a href="index.source.html" class="el_package">nl.fontys.s3.daclothes.persistence.entity</a> &gt; <span class="el_source">UserEntity.java</span></div><h1>UserEntity.java</h1><pre class="source lang-java linenums">package nl.fontys.s3.daclothes.persistence.entity;
+
+import jakarta.annotation.Nullable;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
+
+import java.util.List;
+import java.util.Set;
+
+<span class="pc" id="L16">@Builder</span>
+<span class="pc bnc" id="L17" title="All 56 branches missed.">@Data</span>
+<span class="fc" id="L18">@AllArgsConstructor</span>
+<span class="fc" id="L19">@NoArgsConstructor</span>
+@Entity
+@Table(name = &quot;user&quot;)
+public class UserEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = &quot;id&quot;)
+<span class="fc" id="L26">    private long id;</span>
+
+    @NotBlank
+    @Column(name = &quot;name&quot;)
+    @Length(min = 2, max = 50)
+<span class="fc" id="L31">    private String name;</span>
+
+    @NotBlank
+    @Email
+    @Column(name = &quot;email&quot;)
+<span class="fc" id="L36">    private String email;</span>
+
+    @NotBlank
+    @Column(name = &quot;password&quot;)
+<span class="fc" id="L40">    private String password;</span>
+
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name = &quot;user_id&quot;)
+<span class="fc" id="L44">    private Set&lt;UserTypeEntity&gt; type;</span>
+
+    @OneToOne
+    @JoinColumn(name = &quot;cart_id&quot;)
+<span class="fc" id="L48">    private CartEntity cart;</span>
+
+    @OneToMany
+    @Nullable
+    @JoinColumn(name = &quot;order_list&quot;)
+<span class="fc" id="L53">    private List&lt;OrderEntity&gt; orders;</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

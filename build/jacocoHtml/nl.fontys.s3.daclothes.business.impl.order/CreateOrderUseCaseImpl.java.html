@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CreateOrderUseCaseImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">DaClothes</a> &gt; <a href="index.source.html" class="el_package">nl.fontys.s3.daclothes.business.impl.order</a> &gt; <span class="el_source">CreateOrderUseCaseImpl.java</span></div><h1>CreateOrderUseCaseImpl.java</h1><pre class="source lang-java linenums">package nl.fontys.s3.daclothes.business.impl.order;
+
+import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
+import nl.fontys.s3.daclothes.business.cart.ClearCartUseCase;
+import nl.fontys.s3.daclothes.business.exceptions.UnauthorizedDataAccessException;
+import nl.fontys.s3.daclothes.business.exceptions.UserNotFoundException;
+import nl.fontys.s3.daclothes.business.order.CreateOrderUseCase;
+import nl.fontys.s3.daclothes.configuration.security.token.AccessToken;
+import nl.fontys.s3.daclothes.domain.CreateOrderResponse;
+import nl.fontys.s3.daclothes.domain.enums.USER_TYPE;
+import nl.fontys.s3.daclothes.persistence.OrderRepository;
+import nl.fontys.s3.daclothes.persistence.ProductRepository;
+import nl.fontys.s3.daclothes.persistence.UserRepository;
+import nl.fontys.s3.daclothes.persistence.entity.CartEntity;
+import nl.fontys.s3.daclothes.persistence.entity.OrderEntity;
+import nl.fontys.s3.daclothes.persistence.entity.UserEntity;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.Optional;
+
+@Service
+<span class="fc" id="L24">@AllArgsConstructor</span>
+public class CreateOrderUseCaseImpl implements CreateOrderUseCase {
+    private final OrderRepository orderRepository;
+    private final ProductRepository productRepository;
+    private final AccessToken accessToken;
+    private final UserRepository userRepository;
+    private final ClearCartUseCase clearCartUseCase;
+
+    @Override
+    @Transactional
+    public CreateOrderResponse createOrder () {
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        if(accessToken.getRoles().isEmpty()){</span>
+<span class="fc" id="L36">            throw new UnauthorizedDataAccessException(&quot;YOU_HAVE_TO_LOG_IN&quot;);</span>
+        }
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        if (!accessToken.getRoles().contains(USER_TYPE.BUYER.toString())){</span>
+<span class="fc" id="L39">            throw new UnauthorizedDataAccessException(&quot;ONLY_BUYER_CAN_CREATE_AN_ORDER&quot;);</span>
+        }
+<span class="fc" id="L41">        Optional&lt;UserEntity&gt; userEntityOptional = userRepository.findById(accessToken.getUserId());</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">        if(userEntityOptional.isEmpty()){</span>
+<span class="fc" id="L43">            throw new UserNotFoundException(&quot;USER_NOT_FOUND&quot;);</span>
+        }
+<span class="fc" id="L45">        UserEntity user = userEntityOptional.get();</span>
+<span class="fc" id="L46">        CartEntity cartEntity = user.getCart();</span>
+<span class="pc bpc" id="L47" title="3 of 4 branches missed.">        if(cartEntity == null || cartEntity.getCartProductList().isEmpty()){</span>
+<span class="fc" id="L48">            throw new UnauthorizedDataAccessException(&quot;CART_NOT_FOUND&quot;);</span>
+        }
+<span class="nc" id="L50">        OrderEntity orderEntity = OrderEntity.builder()</span>
+<span class="nc" id="L51">                .created_at(new Date())</span>
+<span class="nc" id="L52">                .total_price(cartEntity.getTotalPrice())</span>
+<span class="nc" id="L53">                .order_product_list(cartEntity.getCartProductList())</span>
+<span class="nc" id="L54">                .build();</span>
+
+<span class="nc" id="L56">        orderRepository.save(orderEntity);</span>
+<span class="nc" id="L57">        user.getOrders().add(orderEntity);</span>
+<span class="nc" id="L58">        userRepository.save(user);</span>
+<span class="nc" id="L59">        cartEntity.getCartProductList().forEach(productEntity -&gt; {</span>
+<span class="nc" id="L60">            productEntity.setAvailable(false);</span>
+<span class="nc" id="L61">        productRepository.save(productEntity);</span>
+<span class="nc" id="L62">        });</span>
+<span class="nc" id="L63">        clearCartUseCase.clearCart(user.getId());</span>
+<span class="nc" id="L64">        return CreateOrderResponse.builder()</span>
+<span class="nc" id="L65">                .id(orderEntity.getId())</span>
+<span class="nc" id="L66">                .build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

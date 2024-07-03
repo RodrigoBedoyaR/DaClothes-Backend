@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="nl.fontys.s3.daclothes.business.impl.cart.AddProductToCartUseCaseImplTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-01-22T23:42:06" hostname="Rodrigos-MBP.home" time="0.926">
+  <properties/>
+  <testcase name="addProductToCart()" classname="nl.fontys.s3.daclothes.business.impl.cart.AddProductToCartUseCaseImplTest" time="0.926"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

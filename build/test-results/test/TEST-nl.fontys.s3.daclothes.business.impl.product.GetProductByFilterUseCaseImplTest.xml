@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="nl.fontys.s3.daclothes.business.impl.product.GetProductByFilterUseCaseImplTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2024-01-22T23:42:07" hostname="Rodrigos-MBP.home" time="0.014">
+  <properties/>
+  <testcase name="getProductsByFilter_categoryAndCondition()" classname="nl.fontys.s3.daclothes.business.impl.product.GetProductByFilterUseCaseImplTest" time="0.007"/>
+  <testcase name="getProductsByFilter_category()" classname="nl.fontys.s3.daclothes.business.impl.product.GetProductByFilterUseCaseImplTest" time="0.001"/>
+  <testcase name="getProductsByFilter_categorySizeAndCondition()" classname="nl.fontys.s3.daclothes.business.impl.product.GetProductByFilterUseCaseImplTest" time="0.001"/>
+  <testcase name="getProductsByFilter_categoryAndSize()" classname="nl.fontys.s3.daclothes.business.impl.product.GetProductByFilterUseCaseImplTest" time="0.001"/>
+  <testcase name="getProductsByFilter_conditionAndSize()" classname="nl.fontys.s3.daclothes.business.impl.product.GetProductByFilterUseCaseImplTest" time="0.001"/>
+  <testcase name="getProductsByFilter_size()" classname="nl.fontys.s3.daclothes.business.impl.product.GetProductByFilterUseCaseImplTest" time="0.001"/>
+  <testcase name="getProductsByFilter_condition()" classname="nl.fontys.s3.daclothes.business.impl.product.GetProductByFilterUseCaseImplTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

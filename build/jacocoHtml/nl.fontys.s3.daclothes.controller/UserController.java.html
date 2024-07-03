@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">DaClothes</a> &gt; <a href="index.source.html" class="el_package">nl.fontys.s3.daclothes.controller</a> &gt; <span class="el_source">UserController.java</span></div><h1>UserController.java</h1><pre class="source lang-java linenums">package nl.fontys.s3.daclothes.controller;
+
+
+import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
+import nl.fontys.s3.daclothes.business.user.CreateUserUseCase;
+import nl.fontys.s3.daclothes.business.user.GetUserByIdUseCase;
+import nl.fontys.s3.daclothes.business.user.UpdateUserUseCase;
+import nl.fontys.s3.daclothes.domain.CreateUserRequest;
+import nl.fontys.s3.daclothes.domain.CreateUserResponse;
+import nl.fontys.s3.daclothes.domain.UpdateUserRequest;
+import nl.fontys.s3.daclothes.domain.User;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
+
+@RestController
+@RequestMapping(&quot;/user&quot;)
+<span class="fc" id="L21">@AllArgsConstructor</span>
+@CrossOrigin(&quot;http://localhost:5173&quot;)
+public class UserController {
+    private final CreateUserUseCase createUserUseCase;
+    private final GetUserByIdUseCase getUserByIdUseCase;
+    private final UpdateUserUseCase updateUserUseCase;
+
+    @PostMapping
+    public ResponseEntity&lt;CreateUserResponse&gt; createUser ( @RequestBody @Valid CreateUserRequest request ){
+<span class="nc" id="L30">        CreateUserResponse response = createUserUseCase.createUser(request);</span>
+<span class="nc" id="L31">        return ResponseEntity.status(HttpStatus.CREATED).body(response);</span>
+    }
+
+    @GetMapping(&quot;{id}&quot;)
+    public ResponseEntity&lt;User&gt; getUserById(@PathVariable(value = &quot;id&quot;)final long id){
+<span class="fc" id="L36">        final Optional&lt;User&gt; userOptional = getUserByIdUseCase.getUserById(id);</span>
+<span class="pc bpc" id="L37" title="1 of 2 branches missed.">        if (userOptional.isEmpty()){</span>
+<span class="fc" id="L38">            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();</span>
+        }
+<span class="nc" id="L40">        return ResponseEntity.ok().body(userOptional.get());</span>
+    }
+
+    @PutMapping(&quot;{id}&quot;)
+    public ResponseEntity&lt;Void&gt; updateUser( @PathVariable(value = &quot;id&quot;)final long id, @RequestBody @Valid UpdateUserRequest updateUserRequest){
+<span class="fc" id="L45">        updateUserRequest.setId(id);</span>
+<span class="fc" id="L46">        updateUserUseCase.update(updateUserRequest);</span>
+<span class="fc" id="L47">        return ResponseEntity.noContent().build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RemoveProductFromCartUseCaseImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">DaClothes</a> &gt; <a href="index.source.html" class="el_package">nl.fontys.s3.daclothes.business.impl.cart</a> &gt; <span class="el_source">RemoveProductFromCartUseCaseImpl.java</span></div><h1>RemoveProductFromCartUseCaseImpl.java</h1><pre class="source lang-java linenums">package nl.fontys.s3.daclothes.business.impl.cart;
+
+import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
+import nl.fontys.s3.daclothes.business.cart.GetTotalPriceUseCase;
+import nl.fontys.s3.daclothes.business.cart.RemoveProductFromCartUseCase;
+import nl.fontys.s3.daclothes.business.exceptions.ProductNotFoundException;
+import nl.fontys.s3.daclothes.business.exceptions.UnauthorizedDataAccessException;
+import nl.fontys.s3.daclothes.business.exceptions.UserNotFoundException;
+import nl.fontys.s3.daclothes.business.user.CheckIfUserIsLoggedUseCase;
+import nl.fontys.s3.daclothes.configuration.security.token.AccessToken;
+import nl.fontys.s3.daclothes.persistence.CartRepository;
+import nl.fontys.s3.daclothes.persistence.ProductRepository;
+import nl.fontys.s3.daclothes.persistence.UserRepository;
+import nl.fontys.s3.daclothes.persistence.entity.CartEntity;
+import nl.fontys.s3.daclothes.persistence.entity.ProductEntity;
+import nl.fontys.s3.daclothes.persistence.entity.UserEntity;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
+<span class="fc" id="L22">@Service</span>
+<span class="fc" id="L23">@AllArgsConstructor</span>
+public class RemoveProductFromCartUseCaseImpl implements RemoveProductFromCartUseCase {
+    private final CartRepository cartRepository;
+    private final AccessToken accessToken;
+    private final UserRepository userRepository;
+    private final GetTotalPriceUseCase getTotalPriceUseCase;
+    private final CheckIfUserIsLoggedUseCase checkIfUserIsLoggedUseCase;
+    private final ProductRepository productRepository;
+    @Override
+    @Transactional
+    public void removeFromCart ( long productId ) {
+<span class="fc" id="L34">        checkIfUserIsLoggedUseCase.checkIfUserIsLogged(accessToken);</span>
+<span class="fc" id="L35">        Optional&lt;UserEntity&gt; userOptional = userRepository.findById(accessToken.getUserId());</span>
+<span class="pc bpc" id="L36" title="1 of 2 branches missed.">        if (userOptional.isEmpty()) {</span>
+<span class="nc" id="L37">            throw new UserNotFoundException(&quot;User not found&quot;);</span>
+        }
+
+<span class="fc" id="L40">        Optional&lt;ProductEntity&gt; productEntityOptional = productRepository.findById(productId);</span>
+<span class="pc bpc" id="L41" title="1 of 2 branches missed.">        if (productEntityOptional.isEmpty()) {</span>
+<span class="nc" id="L42">            throw new ProductNotFoundException(&quot;Product not found&quot;);</span>
+        }
+
+<span class="fc" id="L45">        UserEntity userEntity = userOptional.get();</span>
+<span class="pc bpc" id="L46" title="1 of 2 branches missed.">        if(userEntity.getId() != accessToken.getUserId()){</span>
+<span class="nc" id="L47">            throw new UnauthorizedDataAccessException(&quot;Access denied!&quot;);</span>
+        }
+<span class="fc" id="L49">        CartEntity cartEntity = userEntity.getCart();</span>
+<span class="fc" id="L50">        ProductEntity productEntity = productEntityOptional.get();</span>
+<span class="pc bpc" id="L51" title="1 of 2 branches missed.">        assert cartEntity.getCartProductList() != null;</span>
+<span class="fc" id="L52">        cartEntity.getCartProductList().remove(productEntity);</span>
+
+<span class="fc" id="L54">        cartEntity.setTotalPrice(getTotalPriceUseCase.totalPrice(userEntity.getId()) - productEntity.getPrice());</span>
+<span class="fc" id="L55">        cartRepository.save(cartEntity);</span>
+
+<span class="fc" id="L57">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

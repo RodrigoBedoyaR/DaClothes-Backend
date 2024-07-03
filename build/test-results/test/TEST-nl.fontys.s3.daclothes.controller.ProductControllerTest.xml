@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="nl.fontys.s3.daclothes.controller.ProductControllerTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-01-22T23:42:09" hostname="Rodrigos-MBP.home" time="0.119">
+  <properties/>
+  <testcase name="getProductById()" classname="nl.fontys.s3.daclothes.controller.ProductControllerTest" time="0.086"/>
+  <testcase name="getProducts()" classname="nl.fontys.s3.daclothes.controller.ProductControllerTest" time="0.011"/>
+  <testcase name="createProduct()" classname="nl.fontys.s3.daclothes.controller.ProductControllerTest" time="0.019"/>
+  <system-out><![CDATA[00:42:07.914 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [nl.fontys.s3.daclothes.controller.ProductControllerTest]: ProductControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+00:42:07.990 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration nl.fontys.s3.daclothes.DaClothesApplication for test class nl.fontys.s3.daclothes.controller.ProductControllerTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.1.3)
+
+2024-01-23T00:42:08.164+01:00  INFO 4447 --- [    Test worker] n.f.s.d.c.ProductControllerTest          : Starting ProductControllerTest using Java 17.0.8 with PID 4447 (started by rodrigo in /Users/rodrigo/Desktop/Fontys/Sem 3/s3-individual-project-rodrigo-bedoya/DaClothes-Backend)
+2024-01-23T00:42:08.165+01:00  INFO 4447 --- [    Test worker] n.f.s.d.c.ProductControllerTest          : No active profile set, falling back to 1 default profile: "default"
+2024-01-23T00:42:08.947+01:00  WARN 4447 --- [    Test worker] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: e15d3b3f-6198-4c31-9ce0-0d9721e01740
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-01-23T00:42:09.036+01:00  INFO 4447 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6fe2f6a0, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@392a40d9, org.springframework.security.web.context.SecurityContextHolderFilter@73859ca8, org.springframework.security.web.header.HeaderWriterFilter@370bd951, org.springframework.security.web.csrf.CsrfFilter@25379b3c, org.springframework.security.web.authentication.logout.LogoutFilter@71d6e503, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@78605670, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@678c654c, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@2c9542eb, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@4b33b5b0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5b1378cf, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@24f1d4f3, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3be94b12, org.springframework.security.web.access.ExceptionTranslationFilter@6705b98b, org.springframework.security.web.access.intercept.AuthorizationFilter@7e941cc8]
+2024-01-23T00:42:09.073+01:00  INFO 4447 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2024-01-23T00:42:09.074+01:00  INFO 4447 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-01-23T00:42:09.074+01:00  INFO 4447 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2024-01-23T00:42:09.091+01:00  INFO 4447 --- [    Test worker] n.f.s.d.c.ProductControllerTest          : Started ProductControllerTest in 1.072 seconds (process running for 3.397)
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /products
+       Parameters = {}
+          Headers = []
+             Body = null
+    Session Attrs = {SPRING_SECURITY_CONTEXT=SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=user, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[ROLE_USER]]]}
+
+Handler:
+             Type = nl.fontys.s3.daclothes.controller.ProductController
+           Method = nl.fontys.s3.daclothes.controller.ProductController#getProducts()
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = application/json
+             Body = {"products":[{"id":1,"name":"Nike sunglasses","description":"Beautiful blue Sunglasses","size":"Normal","category":"Accessories","brand":"Nike","productCondition":"Good","price":100.0,"username":null,"available":false},{"id":2,"name":"Airforce Max","description":"Really nice shoes. I don't use them anymore.","size":"46","category":"Shoes","brand":"Nike","productCondition":"Brand New","price":23.49,"username":null,"available":false}]}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+2024-01-23T00:42:09.210+01:00  INFO 4447 --- [    Test worker] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2024-01-23T00:42:09.211+01:00  INFO 4447 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-01-23T00:42:09.211+01:00  INFO 4447 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

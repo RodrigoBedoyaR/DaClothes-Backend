@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GetProductsByFilteringUseCaseImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">DaClothes</a> &gt; <a href="index.source.html" class="el_package">nl.fontys.s3.daclothes.business.impl.product</a> &gt; <span class="el_source">GetProductsByFilteringUseCaseImpl.java</span></div><h1>GetProductsByFilteringUseCaseImpl.java</h1><pre class="source lang-java linenums">package nl.fontys.s3.daclothes.business.impl.product;
+
+import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
+import nl.fontys.s3.daclothes.business.impl.converters.ProductConverter;
+import nl.fontys.s3.daclothes.business.product.GetProductsByFilteringUseCase;
+import nl.fontys.s3.daclothes.domain.GetProductsResponse;
+import nl.fontys.s3.daclothes.domain.Product;
+import nl.fontys.s3.daclothes.persistence.ProductRepository;
+import nl.fontys.s3.daclothes.persistence.entity.ProductEntity;
+import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.List;
+<span class="fc" id="L15">@AllArgsConstructor</span>
+@Service
+public class GetProductsByFilteringUseCaseImpl implements GetProductsByFilteringUseCase {
+
+    private final ProductRepository productRepository;
+
+    @Override
+    @Transactional
+    public GetProductsResponse getProductsByFilters ( String category, String size, String condition ) {
+<span class="fc" id="L24">        List&lt;ProductEntity&gt; productList = null;</span>
+<span class="fc bfc" id="L25" title="All 6 branches covered.">        if(category != null &amp;&amp; size != null &amp;&amp; condition != null){</span>
+<span class="fc" id="L26">            productList = (productRepository.findByCategoryAndProductConditionAndSizeContainingIgnoreCase(category, condition, size));</span>
+<span class="fc bfc" id="L27" title="All 4 branches covered.">        } else if (category != null &amp;&amp; size != null) {</span>
+<span class="fc" id="L28">            productList = productRepository.findByCategoryAndSizeContainingIgnoreCase(category, size);</span>
+<span class="fc bfc" id="L29" title="All 4 branches covered.">        } else if (condition != null &amp;&amp; size != null) {</span>
+<span class="fc" id="L30">            productList = productRepository.findByProductConditionAndSizeContainingIgnoreCase(condition, size);</span>
+<span class="fc bfc" id="L31" title="All 4 branches covered.">        } else if (category != null &amp;&amp; condition != null) {</span>
+<span class="fc" id="L32">            productList = productRepository.findByProductConditionAndCategoryContainingIgnoreCase(condition, category);</span>
+<span class="fc bfc" id="L33" title="All 2 branches covered.">        } else if (category != null) {</span>
+<span class="fc" id="L34">            productList = productRepository.findByCategoryContainingIgnoreCase(category);</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        } else if (size != null) {</span>
+<span class="fc" id="L36">            productList = productRepository.findBySizeContainingIgnoreCase(size);</span>
+<span class="pc bpc" id="L37" title="1 of 2 branches missed.">        } else if (condition != null) {</span>
+<span class="fc" id="L38">            productList = productRepository.findByProductConditionContainingIgnoreCase(condition);</span>
+        }
+<span class="pc bpc" id="L40" title="1 of 2 branches missed.">        if (productList == null){</span>
+<span class="nc" id="L41">            return GetProductsResponse.builder().products(Collections.emptyList()).build();</span>
+        }
+<span class="fc" id="L43">        List&lt;Product&gt; convertedProduct = productList.stream()</span>
+<span class="fc" id="L44">                .map(ProductConverter::convert).toList();</span>
+<span class="fc" id="L45">        return GetProductsResponse.builder().products(convertedProduct).build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="nl.fontys.s3.daclothes.business.impl.user.CreateUserUseCaseImplTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-01-22T23:42:07" hostname="Rodrigos-MBP.home" time="0.003">
+  <properties/>
+  <testcase name="createUser_savesUserInDB()" classname="nl.fontys.s3.daclothes.business.impl.user.CreateUserUseCaseImplTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

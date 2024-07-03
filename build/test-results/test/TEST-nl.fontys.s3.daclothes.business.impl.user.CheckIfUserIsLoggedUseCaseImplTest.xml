@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="nl.fontys.s3.daclothes.business.impl.user.CheckIfUserIsLoggedUseCaseImplTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-01-22T23:42:07" hostname="Rodrigos-MBP.home" time="0.002">
+  <properties/>
+  <testcase name="testCheckIfUserIsLogged()" classname="nl.fontys.s3.daclothes.business.impl.user.CheckIfUserIsLoggedUseCaseImplTest" time="0.001"/>
+  <testcase name="testCheckIfUserIsLoggedIn()" classname="nl.fontys.s3.daclothes.business.impl.user.CheckIfUserIsLoggedUseCaseImplTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

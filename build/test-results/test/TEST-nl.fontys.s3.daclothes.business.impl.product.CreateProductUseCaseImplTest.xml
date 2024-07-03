@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="nl.fontys.s3.daclothes.business.impl.product.CreateProductUseCaseImplTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-01-22T23:42:07" hostname="Rodrigos-MBP.home" time="0.005">
+  <properties/>
+  <testcase name="createProduct_saves_newProductInDB()" classname="nl.fontys.s3.daclothes.business.impl.product.CreateProductUseCaseImplTest" time="0.003"/>
+  <testcase name="createProduct_throwsError_becauseUserIsABuyer()" classname="nl.fontys.s3.daclothes.business.impl.product.CreateProductUseCaseImplTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
